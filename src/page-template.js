@@ -1,16 +1,24 @@
-// HTML TEMPLATE GOES HERE
 // GENERATE THE HTML PAGES
 const makeTeam = team => {
     // a method for a template to render manager info
+    const generateManager = manager = {
 
+   
+    }
     // a method for a template to render engineer info
+    const generateEngineer = engineer = {
 
+
+}
     // a method for a template to render intern info
 
 }
-const generateTeam = team => {
-    const  generateManager = manager = {
-        return `${manager.getName()} etc etc`
+
+
+
+
+
+        
     }
     const html = [];
         html.push(team
@@ -49,7 +57,7 @@ return `
         <div class="row">
             <div class="team-area col-12 d-flex justify-content-center">
                 YOUR METHOD GOES HERE....THE CARDS OF MANAGER, INTERN, ENGINEER WILL BE HERE.
-                ${someFunction(team)}
+                ${team}
             </div>
         </div>
     </div>

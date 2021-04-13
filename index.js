@@ -6,6 +6,8 @@
 // REQUIRE that page-template.js
 // We are receiving that anonymous function
 // Giving the name of pageTemplate
+const inquirer = require (`inquirer`);
+const Manager = require('./lib/Manager');
 const pageTemplate = require('./src/page-template.js');
 // And now we can use that pageTemplate as a function, which can ACCEPT a parameter
 pageTemplate(answers_from_inquirer_prompt);
@@ -20,19 +22,45 @@ pageTemplate(answers_from_inquirer_prompt);
 
 
 
-const path = require("path");
-const fs = require("fs");
-const OUTPUT_DIR = path.resolve(__dirname, "dist")
-const outputPath = path.join(OUTPUT_DIR, "team.html");
-function runApp() {
 //   ...Inquirer prompt and the functions that will ask users about manager, intern, and engineer.
 //   LOGIC GOES HERE 
-  function buildTeam() {
-    // Create the output directory if the output path doesn't exist
-    if (!fs.existsSync(OUTPUT_DIR)) {
-      fs.mkdirSync(OUTPUT_DIR)
+const membersArray[]
+
+function runApp() {
+  inquirer.prompt( [
+    {
+      type: 'input',
+      name: 'managerName',
+      message: "What is your team manager's name?",
+    },
+    {
+      type: 'input',
+      name: 'managerID',
+      message: 'What is the team managers name?',
+    },
+    {
+      type: 'input',
+      name: 'managerEmail',
+      message: 'What is the team managers email?',
+    },
+    {
+      type: 'input',
+      name: 'managerOfficeNum',
+      message: 'What is your team managers office number?',
     }
-    fs.writeFileSync(outputPath, render(teamMembers), "utf-8");
-  }
+  ]).then(answers => {
+
+    console.log(answers);
+    const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeName);
+    console.log(manager);
+    membersArray.push(manager);
+    console.log(membersArray);
+  })
+
+
+
 }
+
 runApp();
+
+
