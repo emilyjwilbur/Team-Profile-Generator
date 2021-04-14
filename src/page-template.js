@@ -4,7 +4,9 @@
       
     
     
-    
+    // const generateManager = manager = {
+    //     return `${manager.getName()}`
+    // }
     
     
     

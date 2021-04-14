@@ -1,13 +1,9 @@
-// this is where your main logic will lie
 
-// You would first require ALL of the files and node packages needed
-// Engineer, Intern, Manager
-
-// REQUIRE that page-template.js
-// We are receiving that anonymous function
-// Giving the name of pageTemplate
-const inquirer = require (`inquirer`);
+const inquirer = require ('inquirer');
 const Manager = require('./lib/Manager');
+const Employee = require('./lib/Employee');
+const Intern = require('./lib/Intern');
+const Engineer = require('./lib/Engineer')
 const pageTemplate = require('./src/page-template.js');
 const path = require("path");
 const fs = require("fs");
@@ -15,16 +11,7 @@ const fs = require("fs");
 
 const OUTPUT_DIR = path.resolve(__dirname, "dist");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
-// And now we can use that pageTemplate as a function, which can ACCEPT a parameter
 
-
-// INDEX FILES ARE CONSIDERED THE ENTRY POINT TO YOUR APPLICATION
-
-// IF THIS IS YOUR ENTRY POINT, YOU MUST DO YOUR INQUIRER HERE
-
-// THIS IS WHERE YOU DO YOUR FS WRITEFILE STUFF
-
-// THE DIST FOLDER IS WHERE THE OUTPUT HTML FILES WILL LAND
 
 
 
@@ -33,51 +20,117 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const membersArray = [];
 
-function runApp() {
-  function createManager() {
-    inquirer.prompt( [
-      {
-        type: 'input',
-        name: 'managerName',
-        message: "What is your team manager's name?",
-      },
-      {
-        type: 'input',
-        name: 'managerId',
-        message: 'What is the team managers id?',
-      },
-      {
-        type: 'input',
-        name: 'managerEmail',
-        message: 'What is the team managers email?',
-      },
-      {
-        type: 'input',
-        name: 'managerOfficeNum',
-        message: 'What is your team managers office number?',
-      }
-    ]).then(answers => {
-  
-      console.log(answers);
-      const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNum);
-      console.log(manager);
-      membersArray.push(manager);
-      console.log(membersArray);
-      
+const initialQuestions = () => {
+  inquirer.prompt([{
+    type: 'list',
+    message: 'What type of employee?',
+    name: 'employeeType',
+    choices: [Manager, Engineer, Intern]
+  },
+
+  ])
+    .then(answer => {
+      if (answer.employeeType === 'Manager') {
+        managerQuestions();
+      } else if
+        (answer.employeeType === 'Engineer') {
+          engineerQuestions();
+        }else if
+        (answer.employeeType === 'Intern') {
+          internQuestions();
+        }
+        else {
+          console.log('Done');
+          return;
+        }
     })
-
-  }
-
-function buildTeam() {
-  if (!fs.existsSync(OUTPUT_DIR)) {
-    fs.mkdirSync(OUTPUT_DIR)
-  }
-  fs.writeFileSync(outputPath, render(membersArray), "utf-8");
-}
-  buildTeam();
-
 }
 
-runApp();
+initialQuestions();
+
+const internQuestions = () => {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'internName',
+      message: 'What is the interns name?'
+    },
+    {
+      type: 'input',
+      name: 'id',
+      message: 'What is the interns employee id?'
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'What is the interns email address?'
+    },
+    {
+      type: 'input',
+      name: 'school',
+      message: 'What school does the intern go to?'
+    },
+  ])
+    .then(answers => {
+      const intern = new Intern(answers.internName, answers.id, answers.email, answers.school);
+      employeeArr.push(intern);
+      console.log(employeeArr);
+    })
+}
+
+
+
+
+
+
+
+
+
+// function runApp() {
+//   function createManager() {
+//     inquirer.prompt( [
+//       {
+//         type: 'input',
+//         name: 'managerName',
+//         message: "What is your team manager's name?",
+//       },
+//       {
+//         type: 'input',
+//         name: 'managerId',
+//         message: 'What is the team managers id?',
+//       },
+//       {
+//         type: 'input',
+//         name: 'managerEmail',
+//         message: 'What is the team managers email?',
+//       },
+//       {
+//         type: 'input',
+//         name: 'managerOfficeNum',
+//         message: 'What is your team managers office number?',
+//       }
+//     ]).then(answers => {
+  
+//       console.log(answers);
+//       const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNum);
+//       console.log(manager);
+//       membersArray.push(manager);
+//       console.log(membersArray);
+      
+//     })
+
+//   }
+
+// function buildTeam() {
+//   if (!fs.existsSync(OUTPUT_DIR)) {
+//     fs.mkdirSync(OUTPUT_DIR)
+//   }
+//   fs.writeFileSync(outputPath, render(membersArray), "utf-8");
+// }
+//   buildTeam();
+
+// }
+
+// runApp();
 
 
