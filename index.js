@@ -151,3 +151,17 @@ const createManager = () => {
 
 
 
+
+// function buildTeam() {
+//   if (!fs.existsSync(OUTPUT_DIR)) {
+//     fs.mkdirSync(OUTPUT_DIR)
+//   }
+//   fs.writeFileSync(outputPath, render(membersArray), "utf-8");
+// }
+//   buildTeam();
+
+
+
+// runApp();
+
+

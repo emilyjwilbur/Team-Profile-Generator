@@ -1,26 +1,69 @@
 // GENERATE THE HTML PAGES
 
   const generateTeam = team => {
+      const manager = team.manager.map(function(job) {
+        let managerHtml = `
+
+
+
+        <div class="container">
+        <div class="row">
+            <div class="team-area col-12 d-flex justify-content-center">
+            <h2>${job.name}</h2>
+            <h3>Manager</h3>
+            <p>ID: ${job.id}</p>
+            <p>Email: <a href="mailto${job.email}">${job.email}</a></p>
+            <p>Office Number: ${job.officeNum}</p>
+            </div>
+        </div>
+    </div> 
+        `
+        return managerHtml
+
+      });
       
-    
-    
-    // const generateManager = manager = {
-    //     return `${manager.getName()}`
-    // }
-    
-    
-    
-    
-    
-    const html = [];
-        html.push(team
-            .filter(employee => employee.getRole() === "Manager")
-            .map(manager => generateManager(manager))
-            );
-            return html.join("");
-  }
+
+  
 
 
+  const engineer = team.engineer.map(function(job) {
+      let engineerHtml = `
+      
+      <div class="container">
+        <div class="row">
+            <div class="team-area col-12 d-flex justify-content-center">
+            <h2>${job.name}</h2>
+            <h3>Engineer</h3>
+            <p>ID: ${job.id}</p>
+            <p>Email: <a href="mailto${job.email}">${job.email}</a></p>
+            <p>Github: <a href="https://github.com/${job.github}" target="blank">${job.github}</p>
+            </div>
+        </div>
+    </div> 
+        `
+        return engineerHtml
+      
+  })
+
+  const intern = team.intern.map(function(job) {
+    let internHtml = `
+    
+    <div class="container">
+      <div class="row">
+          <div class="team-area col-12 d-flex justify-content-center">
+          <h2>${job.name}</h2>
+          <h3>Intern</h3>
+          <p>ID: ${job.id}</p>
+          <p>Email: <a href="mailto${job.email}">${job.email}</a></p>
+          <p>School: ${job.school}</p>
+          </div>
+      </div>
+  </div> 
+      `
+      return internHtml
+
+  })
+}
     
 
 // We are exporting out an anonymous function
@@ -49,10 +92,8 @@ return `
     <div class="container">
         <div class="row">
             <div class="team-area col-12 d-flex justify-content-center">
-                YOUR METHOD GOES HERE....THE CARDS OF MANAGER, INTERN, ENGINEER WILL BE HERE.
+                ${generateTeam(team)}
                
-
-
             </div>
         </div>
     </div>
