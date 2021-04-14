@@ -7,6 +7,7 @@ const Engineer = require('./lib/Engineer')
 const pageTemplate = require('./src/page-template.js');
 const path = require("path");
 const fs = require("fs");
+const Prompt = require('inquirer/lib/prompts/base');
 
 
 const OUTPUT_DIR = path.resolve(__dirname, "dist");
@@ -19,7 +20,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 //   LOGIC GOES HERE 
 
 const membersArray = [];
-
+function runApp() {
 const initialQuestions = () => {
   inquirer.prompt([{
     type: 'list',
@@ -138,11 +139,12 @@ const createManager = () => {
   ])
     .then(answers => {
       console.log(answers);
-      const manager = new Manager(answers.managerName, answers.managerId, answers.managersEmail, answers.managerOfficeNum);
+      const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNum);
       console.log(manager);
       membersArray.push(manager);
       console.log(membersArray)
     })
+}
 }
 
 
@@ -151,17 +153,13 @@ const createManager = () => {
 
 
 
+function buildTeam() {
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR)
+  }
+  fs.writeFileSync(outputPath, render(membersArray), "utf-8");
+}
+  runApp();
 
-// function buildTeam() {
-//   if (!fs.existsSync(OUTPUT_DIR)) {
-//     fs.mkdirSync(OUTPUT_DIR)
-//   }
-//   fs.writeFileSync(outputPath, render(membersArray), "utf-8");
-// }
-//   buildTeam();
-
-
-
-// runApp();
 
 
