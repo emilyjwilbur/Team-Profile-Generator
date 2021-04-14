@@ -51,6 +51,7 @@ run npm i
 ## Activation
 run node index.js and answer prompted questions for employee
 
-
+# Github link
 The project was uploaded to GitHub at the following repository: https://github.com/emilyjwilbur/Team-Profile-Generator
+# Demo Link
 link to demo video: https://drive.google.com/file/d/1aP_dtphcYH5b--PLILfCMr_ZSkuWhHqb/view
