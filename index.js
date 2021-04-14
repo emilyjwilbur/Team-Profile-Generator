@@ -9,8 +9,14 @@
 const inquirer = require (`inquirer`);
 const Manager = require('./lib/Manager');
 const pageTemplate = require('./src/page-template.js');
+const path = require("path");
+const fs = require("fs");
+
+
+const OUTPUT_DIR = path.resolve(__dirname, "dist");
+const outputPath = path.join(OUTPUT_DIR, "team.html");
 // And now we can use that pageTemplate as a function, which can ACCEPT a parameter
-pageTemplate(answers_from_inquirer_prompt);
+
 
 // INDEX FILES ARE CONSIDERED THE ENTRY POINT TO YOUR APPLICATION
 
@@ -24,40 +30,51 @@ pageTemplate(answers_from_inquirer_prompt);
 
 //   ...Inquirer prompt and the functions that will ask users about manager, intern, and engineer.
 //   LOGIC GOES HERE 
-const membersArray[]
+
+const membersArray = [];
 
 function runApp() {
-  inquirer.prompt( [
-    {
-      type: 'input',
-      name: 'managerName',
-      message: "What is your team manager's name?",
-    },
-    {
-      type: 'input',
-      name: 'managerID',
-      message: 'What is the team managers name?',
-    },
-    {
-      type: 'input',
-      name: 'managerEmail',
-      message: 'What is the team managers email?',
-    },
-    {
-      type: 'input',
-      name: 'managerOfficeNum',
-      message: 'What is your team managers office number?',
-    }
-  ]).then(answers => {
+  function createManager() {
+    inquirer.prompt( [
+      {
+        type: 'input',
+        name: 'managerName',
+        message: "What is your team manager's name?",
+      },
+      {
+        type: 'input',
+        name: 'managerId',
+        message: 'What is the team managers id?',
+      },
+      {
+        type: 'input',
+        name: 'managerEmail',
+        message: 'What is the team managers email?',
+      },
+      {
+        type: 'input',
+        name: 'managerOfficeNum',
+        message: 'What is your team managers office number?',
+      }
+    ]).then(answers => {
+  
+      console.log(answers);
+      const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNum);
+      console.log(manager);
+      membersArray.push(manager);
+      console.log(membersArray);
+      
+    })
 
-    console.log(answers);
-    const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeName);
-    console.log(manager);
-    membersArray.push(manager);
-    console.log(membersArray);
-  })
+  }
 
-
+function buildTeam() {
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR)
+  }
+  fs.writeFileSync(outputPath, render(membersArray), "utf-8");
+}
+  buildTeam();
 
 }
 

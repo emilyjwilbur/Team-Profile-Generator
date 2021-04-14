@@ -1,32 +1,23 @@
 // GENERATE THE HTML PAGES
-const makeTeam = team => {
-    // a method for a template to render manager info
-    const generateManager = manager = {
 
-   
-    }
-    // a method for a template to render engineer info
-    const generateEngineer = engineer = {
-
-
-}
-    // a method for a template to render intern info
-
-}
-
-
-
-
-
-        
-    }
+  const generateTeam = team => {
+      
+    
+    
+    
+    
+    
+    
+    
+    
     const html = [];
         html.push(team
             .filter(employee => employee.getRole() === "Manager")
             .map(manager => generateManager(manager))
-        );
-        return html.join("");
-}
+            );
+            return html.join("");
+  }
+
 
     
 
@@ -57,7 +48,9 @@ return `
         <div class="row">
             <div class="team-area col-12 d-flex justify-content-center">
                 YOUR METHOD GOES HERE....THE CARDS OF MANAGER, INTERN, ENGINEER WILL BE HERE.
-                ${team}
+               
+
+
             </div>
         </div>
     </div>
