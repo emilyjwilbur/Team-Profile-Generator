@@ -31,13 +31,13 @@ const initialQuestions = () => {
   ])
     .then(answer => {
       if (answer.employeeType === 'Manager') {
-        managerQuestions();
+        createManager();
       } else if
         (answer.employeeType === 'Engineer') {
-          engineerQuestions();
+          createEngineer();
         }else if
         (answer.employeeType === 'Intern') {
-          internQuestions();
+          createIntern();
         }
         else {
           console.log('Done');
@@ -48,7 +48,7 @@ const initialQuestions = () => {
 
 initialQuestions();
 
-const internQuestions = () => {
+const createIntern = () => {
   inquirer.prompt([
     {
       type: 'input',
@@ -73,8 +73,75 @@ const internQuestions = () => {
   ])
     .then(answers => {
       const intern = new Intern(answers.internName, answers.id, answers.email, answers.school);
-      employeeArr.push(intern);
-      console.log(employeeArr);
+      console.log(intern)
+      membersArray.push(intern);
+      console.log(membersArray)
+
+
+    })
+}
+
+const createEngineer = () => {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'engineerName',
+      message: 'What is the engineers name?'
+    },
+    {
+      type: 'input',
+      name: 'id',
+      message: 'What is the engineers employee id?'
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'What is the engineers email address?'
+    },
+    {
+      type: 'input',
+      name: 'github',
+      message: 'What is the engineers github username?'
+    },
+    
+  ])
+    .then(answers => {
+      const engineer = new Engineer(answers.engineerName, answers.id, answers.email, answers.github);
+      console.log(engineer);
+      membersArray.push(engineer);
+      console.log(membersArray);
+    })
+}
+
+const createManager = () => {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'managerName',
+      message: "What is your team manager's name?"
+    },
+    {
+      type: 'input',
+      name: 'managerId',
+      message: 'What is the team managers id?',
+    },
+    {
+      type: 'input',
+      name: 'managerEmail',
+      message: 'What is the team managers email?',
+    },
+    {
+      type: 'input',
+      name: 'managerOfficeNum',
+      message: 'What is your team managers office number?',
+    },
+  ])
+    .then(answers => {
+      console.log(answers);
+      const manager = new Manager(answers.managerName, answers.managerId, answers.managersEmail, answers.managerOfficeNum);
+      console.log(manager);
+      membersArray.push(manager);
+      console.log(membersArray)
     })
 }
 
@@ -82,55 +149,5 @@ const internQuestions = () => {
 
 
 
-
-
-
-
-// function runApp() {
-//   function createManager() {
-//     inquirer.prompt( [
-//       {
-//         type: 'input',
-//         name: 'managerName',
-//         message: "What is your team manager's name?",
-//       },
-//       {
-//         type: 'input',
-//         name: 'managerId',
-//         message: 'What is the team managers id?',
-//       },
-//       {
-//         type: 'input',
-//         name: 'managerEmail',
-//         message: 'What is the team managers email?',
-//       },
-//       {
-//         type: 'input',
-//         name: 'managerOfficeNum',
-//         message: 'What is your team managers office number?',
-//       }
-//     ]).then(answers => {
-  
-//       console.log(answers);
-//       const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNum);
-//       console.log(manager);
-//       membersArray.push(manager);
-//       console.log(membersArray);
-      
-//     })
-
-//   }
-
-// function buildTeam() {
-//   if (!fs.existsSync(OUTPUT_DIR)) {
-//     fs.mkdirSync(OUTPUT_DIR)
-//   }
-//   fs.writeFileSync(outputPath, render(membersArray), "utf-8");
-// }
-//   buildTeam();
-
-// }
-
-// runApp();
 
 
