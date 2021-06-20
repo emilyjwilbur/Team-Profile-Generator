@@ -32,15 +32,6 @@ WHEN I decide to finish building my team
 THEN I exit the application, and the HTML is generated
 ```
 
-## The Process
-
-- Rewatched class videos and referred to notes on Object-Oriented Programming
-- Google 
-- Due to time constraints and struggle with understanding, I wasn't able to generate an html page through the app.
-- referred to provided code by instructor
-- directory structure
-- Manager, Engineer and Intern classes extending from Employee
-- walkthrough video 
 
 ## Demo video
 https://drive.google.com/file/d/1aP_dtphcYH5b--PLILfCMr_ZSkuWhHqb/view
